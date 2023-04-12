@@ -30,28 +30,34 @@ public class PresentmentService {
 //        TODO: inquiry account by id
 //        TODO: add payment history
 
-        PaymentHistory paymentHistory = savePaymentHistory(travelPackage);
+        PaymentHistory paymentHistory = savePaymentHistory(request, travelPackage);
 //        TODO: mapping response
-        return new PresentmentResponse();
+        return mappingPresentmentResponse(paymentHistory);
     }
 
-    private PaymentHistory savePaymentHistory(TravelPackage travelPackage) {
-        PaymentHistory paymentHistory = new PaymentHistory();
-        paymentHistory.setId();
-        paymentHistory.setName();
-        paymentHistory.setEmail();
-        paymentHistory.setAccountNumber();
-        paymentHistory.setPackageName();
-        paymentHistory.setCount();
-        paymentHistory.setTotal();
-        paymentHistory.setStatus();
-    }
-
-    private PrepareResponse mappingPrepareResponse(List<TravelPackage> travelPackageList) {
-
-        PrepareResponse response = new PrepareResponse();
-        response.setPackageList(travelPackageList);
-
+    private PresentmentResponse mappingPresentmentResponse(PaymentHistory paymentHistory) {
+        PresentmentResponse response = new PresentmentResponse();
+        response.setPaymentHistoryId(paymentHistory.getId());
+        response.setName(paymentHistory.getName());
+        response.setAccount(paymentHistory.getAccountNumber());
+        response.setPackageName(paymentHistory.getPackageName());
+        response.setCount(paymentHistory.getCount().toString());
+        response.setTotal(paymentHistory.getTotal().toString());
+        response.setStatus(paymentHistory.getStatus());
         return response;
+    }
+
+    private PaymentHistory savePaymentHistory(PresentmentRequest request, TravelPackage travelPackage) {
+        Integer total = request.getCount()*travelPackage.getPrice();
+        PaymentHistory paymentHistory = new PaymentHistory();
+        paymentHistory.setName(null);
+        paymentHistory.setEmail(null);
+        paymentHistory.setAccountNumber(null);
+        paymentHistory.setPackageName(travelPackage.getName());
+        paymentHistory.setCount(request.getCount());
+        paymentHistory.setTotal(total);
+        paymentHistory.setStatus("PENDING");
+
+        return paymentHistory;
     }
 }

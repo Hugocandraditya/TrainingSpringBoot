@@ -1,8 +1,7 @@
 package com.travel.paymentService.model;
 
+import jakarta.persistence.*;
 import lombok.Data;
-
-import javax.persistence.*;
 
 @Entity
 @Table(name = "travel_package")
@@ -15,5 +14,5 @@ public class TravelPackage {
     @Column(name = "name")
     private String name;
     @Column(name = "price")
-    private String price;
+    private Integer price;
 }
