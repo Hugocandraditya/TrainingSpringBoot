@@ -7,22 +7,25 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name = "PaymentHistory")
+@Table(name = "payment_history")
 @Data
 public class PaymentHistory {
     @Id
-    @Column
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column
-    private String userId;
-    @Column
-    private String accountId;
-    @Column
-    private String packageId;
-    @Column
+    @Column(name = "name")
+    private String name;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "account_number")
+    private String accountNumber;
+    @Column(name = "package_name")
+    private String packageName;
+    @Column(name = "count")
     private Integer count;
-    @Column
+    @Column(name = "total")
     private Integer total;
-    @Column
-    private Integer status;
+    @Column(name = "status")
+    private String status;
 }

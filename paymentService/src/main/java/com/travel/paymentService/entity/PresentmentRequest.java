@@ -6,4 +6,5 @@ import lombok.Data;
 public class PresentmentRequest {
     private Integer packageId;
     private Integer accountId;
+    private Integer count;
 }
