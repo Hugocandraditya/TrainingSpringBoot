@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class ExecuteRequest {
-    private Integer paymentHistoryId;
-    private String password;
+    private Long paymentHistoryId;
+    private String pin;
 }

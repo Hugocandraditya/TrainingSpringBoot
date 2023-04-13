@@ -5,10 +5,9 @@ import com.travel.paymentService.service.ExecuteService;
 import com.travel.paymentService.service.PrepareService;
 import com.travel.paymentService.service.PresentmentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping("/travel")
 public class PaymentController {
 
@@ -20,24 +19,23 @@ public class PaymentController {
     ExecuteService executeService;
 
     @GetMapping("/prepare")
-    public @ResponseBody
-    PrepareResponse prepare(
-            @RequestParam String id){
+    public PrepareResponse prepare(
+            @RequestParam Long id){
         return prepareService.prepare(id);
     }
 
     @PostMapping("/presentment")
     public PresentmentResponse presentment(
-            @RequestParam String id,
+            @RequestParam Long id,
             @RequestBody PresentmentRequest request){
-        return presentmentService.presentment(request);
+        return presentmentService.presentment(id, request);
     }
 
 
     @PostMapping("/execute")
     public ExecuteResponse execute(
-            @RequestParam String id,
+            @RequestParam Long id,
             @RequestBody ExecuteRequest request){
-        return executeService.execute(request);
+        return executeService.execute(id, request);
     }
 }

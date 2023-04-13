@@ -10,7 +10,7 @@ public class PaymentHistory {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     @Column(name = "name")
     private String name;
     @Column(name = "email")
@@ -20,9 +20,9 @@ public class PaymentHistory {
     @Column(name = "package_name")
     private String packageName;
     @Column(name = "count")
-    private Integer count;
+    private Long count;
     @Column(name = "total")
-    private Integer total;
+    private Long total;
     @Column(name = "status")
     private String status;
 }
