@@ -13,7 +13,7 @@ import java.util.List;
 
 public class UserService {
 
-    @Value(value = "${base.url}")
+    @Value(value = "${url.useraccount}")
     private String basUrl;
 
     @Autowired
