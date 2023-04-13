@@ -22,4 +22,6 @@ public class AccountController {
     public @ResponseBody Optional<Account> getAccountByUserId(@RequestParam("user_id") Long userId) {
         return accountServiceImpl.findByUserId(userId);
     }
+
+
 }
