@@ -25,7 +25,7 @@ public class ExecuteService {
         if(user == null)
             throw new RuntimeException("Failed presentment");
 //        TODO: verif password/pin
-        if(userService.verifyUser(userId,request.getPin()))
+        if(!userService.verifyUser(userId,request.getPin()))
             throw new RuntimeException("Verification Failed");
 //        TODO: inquriy data by paymentHistory Id
         PaymentHistory paymentHistory = updatePaymentHistory(request);
@@ -49,6 +49,8 @@ public class ExecuteService {
         Optional<PaymentHistory> paymentHistoryOpt = paymentHistoryRepo.findById(request.getPaymentHistoryId());
         PaymentHistory paymentHistory = paymentHistoryOpt.get();
 
+        if("SUCCESS".equals(paymentHistory.getStatus()))
+            throw new RuntimeException("FAILED STATUS: "+paymentHistory.getStatus());
         paymentHistory.setStatus("SUCCESS");
 
         paymentHistory = paymentHistoryRepo.save(paymentHistory);
