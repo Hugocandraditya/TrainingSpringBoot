@@ -12,3 +12,5 @@ inquiry no rekening berdasarkan user untuk mengeluarkan nomor rekening apa saja 
 inquiry no rekening berdasarkan id untuk memverif nomor rekening yang diinputkan user
 verif pin untuk memverifikasi pin execute payment
 
+micro project
+database yang digunakan untuk memproses payment
