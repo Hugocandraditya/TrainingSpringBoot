@@ -1,6 +1,7 @@
 package com.travel.useraccount.controller;
 
 import com.travel.useraccount.model.Account;
+import com.travel.useraccount.model.AccountList;
 import com.travel.useraccount.service.AccountServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class AccountController {
     }
 
     @GetMapping("account/user_id")
-    public @ResponseBody Optional<Account> getAccountByUserId(@RequestParam("user_id") Long userId) {
+    public @ResponseBody AccountList getAccountByUserId(@RequestParam("user_id") Long userId) {
         return accountServiceImpl.findByUserId(userId);
     }
 

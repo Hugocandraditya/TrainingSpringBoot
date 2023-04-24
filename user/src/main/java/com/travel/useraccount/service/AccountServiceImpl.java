@@ -1,10 +1,12 @@
 package com.travel.useraccount.service;
 
 import com.travel.useraccount.model.Account;
+import com.travel.useraccount.model.AccountList;
 import com.travel.useraccount.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,7 +25,11 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Optional<Account> findByUserId(Long userId) {
-        return accountRepository.findByUserId(userId);
+    public AccountList findByUserId(Long userId) {
+
+         List<Account> accountList = accountRepository.findByUserId(userId);
+         AccountList accountList1 = new AccountList();
+         accountList1.setAccountList(accountList);
+         return  accountList1;
     }
 }
