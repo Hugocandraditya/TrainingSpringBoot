@@ -1,56 +1,63 @@
 package com.travel.paymentService.service;
 
-import com.travel.paymentService.entity.ExecuteRequest;
 import com.travel.paymentService.entity.client.Account;
 import com.travel.paymentService.entity.client.AccountResponse;
 import com.travel.paymentService.entity.client.User;
+import com.travel.paymentService.repository.UserClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 @Service
 public class UserService {
 
-    @Value(value = "${url.useraccount}")
-    private String basUrl;
-
+    @Value(value = "${url.getUserById}")
+    private String getUserByIdUrl;
+    @Value(value = "${url.getAccountById}")
+    private String getAccountByIdUrl;
+    @Value(value = "${url.getAccountListByUserId}")
+    private String getAccountListByUserIdUrl;
+    @Value(value = "${url.verifyUser}")
+    private String verifyUserUrl;
     @Autowired
-    private RestTemplate restTemplate;
+    private UserClientRepository userClientRepository;
 
     public User getUserById(Long id) {
-        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(basUrl + "/api/user/id")
-                .queryParam("id", id);
-        return restTemplate.getForObject(builder.toUriString(), User.class);
+        try {
+            return userClientRepository.getUserById(new URI(getUserByIdUrl),id);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public Account getAccountById(Long id) {
-
-        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(basUrl + "/api/account/id")
-                .queryParam("id", id);
-        return restTemplate.getForObject(builder.toUriString(), Account.class);
+        try {
+            return userClientRepository.getAccountById(new URI(getAccountByIdUrl),id);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public List<Account> getAccountListByUserId(Long userId) {
+        AccountResponse accountResponse;
+        try {
+            accountResponse = userClientRepository.getAccountListByUserId(new URI(getAccountListByUserIdUrl),userId);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
 
-        UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(basUrl + "/api/account/user_id")
-                .queryParam("user_id", userId);
-        AccountResponse accountResponse = restTemplate.getForObject(builder.toUriString(), AccountResponse.class);
         return accountResponse.getAccountList();
     }
 
     public boolean verifyUser(Long userId, String pin) {
-
         try {
-            UriComponentsBuilder builder = UriComponentsBuilder.fromUriString(basUrl + "/api/account/verify-account")
-                    .queryParam("id", userId)
-                    .queryParam("pin",pin);
-            ResponseEntity<Boolean> response = restTemplate.postForEntity(builder.toUriString(),null,Boolean.class);
+            ResponseEntity<Boolean> response = userClientRepository.verifyUser(new URI(verifyUserUrl),userId,pin);
             return response.getBody();
-        }catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }

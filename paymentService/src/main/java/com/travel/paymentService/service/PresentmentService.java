@@ -1,6 +1,5 @@
 package com.travel.paymentService.service;
 
-import com.travel.paymentService.entity.PrepareResponse;
 import com.travel.paymentService.entity.PresentmentRequest;
 import com.travel.paymentService.entity.PresentmentResponse;
 import com.travel.paymentService.entity.client.Account;
