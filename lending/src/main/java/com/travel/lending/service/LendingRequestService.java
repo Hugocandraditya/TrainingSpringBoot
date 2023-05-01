@@ -27,6 +27,7 @@ public class LendingRequestService {
 
     public ExecuteResponse execute(Long userId, ExecuteRequest request){
         User user = verifiedUser(userId);
+        verifiedPin(userId, request.getPin());
         Account account = userService.getAccountById(request.getAccountId());
 
         ExecuteResponse executeResponse = mappingExecuteResponse(request, user, account);
@@ -40,6 +41,11 @@ public class LendingRequestService {
         if(user == null)
             throw new RuntimeException("Failed verified User");
         return user;
+    }
+
+    private void verifiedPin(Long userId, String pin){
+        if(!userService.verifyUser(userId,pin))
+            throw new RuntimeException("Verification Failed");
     }
 
     private InquiryRequestResponse mappingPrepareResponse(List<Account> accountList) {
@@ -57,7 +63,7 @@ public class LendingRequestService {
         executeResponse.setAmount(request.getAmount());
         executeResponse.setTotalReimbursement(countTotalReimburse(request.getAmount(), request.getInterest()));
         executeResponse.setReference(UUID.randomUUID().toString());
-        executeResponse.setStatus("REQUESTED");
+        executeResponse.setStatus(LendingHelper.REQ_STATUS);
 
         return executeResponse;
     }
