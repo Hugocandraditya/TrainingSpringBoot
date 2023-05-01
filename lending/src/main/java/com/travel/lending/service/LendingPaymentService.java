@@ -14,13 +14,10 @@ public class LendingPaymentService {
     @Autowired
     UserClientRepository userClientRepository;
 
-    public PrepareResponse prepare(){
+    public InquiryResponse prepare(){
         return null;
     }
 
-    public PresentmentResponse presentment(PresentmentRequest request){
-        return null;
-    }
 
     public ExecuteResponse execute(ExecuteRequest request){
         return null;

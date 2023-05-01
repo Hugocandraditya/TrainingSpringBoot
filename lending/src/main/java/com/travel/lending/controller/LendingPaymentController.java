@@ -5,8 +5,6 @@ import com.travel.lending.service.LendingPaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/lending-payment")
 public class LendingPaymentController {
@@ -14,14 +12,8 @@ public class LendingPaymentController {
     LendingPaymentService lendingProductService;
 
     @GetMapping("/prepare")
-    public PrepareResponse AcceptPrepare(){
+    public InquiryResponse AcceptPrepare(){
         return lendingProductService.prepare();
-    }
-
-    @PostMapping("/presentment")
-    public PresentmentResponse AcceptPresentment(
-            @RequestBody PresentmentRequest request){
-        return lendingProductService.presentment(request);
     }
 
     @PostMapping("/execute")

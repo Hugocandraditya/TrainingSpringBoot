@@ -5,8 +5,6 @@ import com.travel.lending.service.LendingRequestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/lending-request")
 public class LendingRequestController {
@@ -14,19 +12,15 @@ public class LendingRequestController {
     LendingRequestService lendingProductService;
 
     @GetMapping("/prepare")
-    public PrepareResponse AcceptPrepare(){
-        return lendingProductService.prepare();
-    }
-
-    @PostMapping("/presentment")
-    public PresentmentResponse AcceptPresentment(
-            @RequestBody PresentmentRequest request){
-        return lendingProductService.presentment(request);
+    public InquiryRequestResponse AcceptPrepare(
+            @RequestParam Long id){
+        return lendingProductService.prepare(id);
     }
 
     @PostMapping("/execute")
     public ExecuteResponse AcceptExecute(
+            @RequestParam Long id,
             @RequestBody ExecuteRequest request){
-        return lendingProductService.execute(request);
+        return lendingProductService.execute(id, request);
     }
 }

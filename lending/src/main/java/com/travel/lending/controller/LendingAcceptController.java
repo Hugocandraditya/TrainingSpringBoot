@@ -12,15 +12,10 @@ public class LendingAcceptController {
     LendingAcceptService lendingAcceptService;
 
     @GetMapping("/prepare")
-    public PrepareResponse AcceptPrepare(){
+    public InquiryResponse AcceptPrepare(){
         return lendingAcceptService.prepare();
     }
 
-    @PostMapping("/presentment")
-    public PresentmentResponse AcceptPresentment(
-            @RequestBody PresentmentRequest request){
-        return lendingAcceptService.presentment(request);
-    }
 
     @PostMapping("/execute")
     public ExecuteResponse AcceptExecute(
