@@ -2,6 +2,7 @@ package com.travel.lending.service;
 
 import com.travel.lending.enitity.client.user.Account;
 import com.travel.lending.enitity.client.user.AccountResponse;
+import com.travel.lending.enitity.client.user.UpdateAccount;
 import com.travel.lending.enitity.client.user.User;
 import com.travel.lending.repository.UserClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -24,6 +26,8 @@ public class UserService {
     private String getAccountListByUserIdUrl;
     @Value(value = "${url.verifyUser}")
     private String verifyUserUrl;
+    @Value(value = "${url.updateAccountBalance}")
+    private String updateAccountBalance;
     @Autowired
     private UserClientRepository userClientRepository;
 
@@ -60,6 +64,20 @@ public class UserService {
             return response.getBody();
         } catch (Exception e) {
             return false;
+        }
+    }
+
+    public void updateAccountBalance(Long userIdBorrower, Long userIdLender, String accountBorrower, String accountLender, BigDecimal amount){
+        UpdateAccount updateAccount = new UpdateAccount();
+        updateAccount.setUserIdBorrower(userIdBorrower);
+        updateAccount.setUserIdLender(userIdLender);
+        updateAccount.setAccountBorrower(accountBorrower);
+        updateAccount.setAccountLender(accountLender);
+        updateAccount.setAmount(amount);
+        try {
+            userClientRepository.updateAccountBalance(new URI(updateAccountBalance),updateAccount);
+        } catch (URISyntaxException e) {
+            throw new RuntimeException(e);
         }
     }
 }

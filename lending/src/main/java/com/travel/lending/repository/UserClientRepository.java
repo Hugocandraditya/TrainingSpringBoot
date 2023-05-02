@@ -2,11 +2,13 @@ package com.travel.lending.repository;
 
 import com.travel.lending.enitity.client.user.Account;
 import com.travel.lending.enitity.client.user.AccountResponse;
+import com.travel.lending.enitity.client.user.UpdateAccount;
 import com.travel.lending.enitity.client.user.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.net.URI;
@@ -35,5 +37,8 @@ public interface UserClientRepository {
             @RequestParam("id") Long id,
             @RequestParam("pin") String pin
     );
-
+    @PostMapping
+    void updateAccountBalance(
+            URI uri,
+            @RequestBody UpdateAccount updateAccount);
 }

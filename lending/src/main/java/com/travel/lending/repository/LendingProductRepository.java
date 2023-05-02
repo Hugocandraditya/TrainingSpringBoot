@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.util.List;
 
-@FeignClient(value = "lending-product-client", url = "${url.product}")
+@FeignClient(value = "lending-product-client", url = "${url.lendingproduct}")
 public interface LendingProductRepository {
     @GetMapping
     List<LendingProduct> inquiryAllLendingProduct(

@@ -5,9 +5,8 @@ import lombok.Data;
 import java.math.BigDecimal;
 
 @Data
-public class ExecuteRequest {
+public class ExecuteLendingAccRequest {
+    private Long productId;
     private Long accountId;
     private String pin;
-    private BigDecimal interest;
-    private BigDecimal amount;
 }

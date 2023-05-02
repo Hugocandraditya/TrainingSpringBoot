@@ -14,12 +14,12 @@ public class LendingPaymentService {
     @Autowired
     UserClientRepository userClientRepository;
 
-    public InquiryResponse prepare(){
+    public InquiryResponse prepare(Long userId){
         return null;
     }
 
 
-    public ExecuteResponse execute(ExecuteRequest request){
+    public ExecuteLendingReqResponse execute(ExecuteLendingReqRequest request){
         return null;
     }
 }

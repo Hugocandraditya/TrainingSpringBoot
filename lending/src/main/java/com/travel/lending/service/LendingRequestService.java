@@ -25,15 +25,15 @@ public class LendingRequestService {
         return mappingPrepareResponse(accountList);
     }
 
-    public ExecuteResponse execute(Long userId, ExecuteRequest request){
+    public ExecuteLendingReqResponse execute(Long userId, ExecuteLendingReqRequest request){
         User user = verifiedUser(userId);
         verifiedPin(userId, request.getPin());
         Account account = userService.getAccountById(request.getAccountId());
 
-        ExecuteResponse executeResponse = mappingExecuteResponse(request, user, account);
-        saveLendingProduct(executeResponse,user);
+        ExecuteLendingReqResponse executeLendingReqResponse = mappingExecuteResponse(request, user, account);
+        saveLendingProduct(executeLendingReqResponse,user);
 
-        return executeResponse;
+        return executeLendingReqResponse;
     }
 
     private User verifiedUser(Long userId){
@@ -55,20 +55,20 @@ public class LendingRequestService {
         return response;
     }
 
-    private ExecuteResponse mappingExecuteResponse(ExecuteRequest request, User user, Account account) {
-        ExecuteResponse executeResponse = new ExecuteResponse();
-        executeResponse.setAccountBorrower(account.getAccNumber());
-        executeResponse.setEmail(user.getEmail());
-        executeResponse.setInterest(request.getInterest());
-        executeResponse.setAmount(request.getAmount());
-        executeResponse.setTotalReimbursement(countTotalReimburse(request.getAmount(), request.getInterest()));
-        executeResponse.setReference(UUID.randomUUID().toString());
-        executeResponse.setStatus(LendingHelper.REQ_STATUS);
+    private ExecuteLendingReqResponse mappingExecuteResponse(ExecuteLendingReqRequest request, User user, Account account) {
+        ExecuteLendingReqResponse executeLendingReqResponse = new ExecuteLendingReqResponse();
+        executeLendingReqResponse.setAccountBorrower(account.getAccNumber());
+        executeLendingReqResponse.setEmail(user.getEmail());
+        executeLendingReqResponse.setInterest(request.getInterest());
+        executeLendingReqResponse.setAmount(request.getAmount());
+        executeLendingReqResponse.setTotalReimbursement(countTotalReimburse(request.getAmount(), request.getInterest()));
+        executeLendingReqResponse.setReference(UUID.randomUUID().toString());
+        executeLendingReqResponse.setStatus(LendingHelper.REQ_STATUS);
 
-        return executeResponse;
+        return executeLendingReqResponse;
     }
 
-    private void saveLendingProduct(ExecuteResponse response, User user){
+    private void saveLendingProduct(ExecuteLendingReqResponse response, User user){
         LendingProduct lendingProduct = new LendingProduct();
         lendingProduct.setUserIdBorrower(user.getId());
         lendingProduct.setAccountBorrower(response.getAccountBorrower());

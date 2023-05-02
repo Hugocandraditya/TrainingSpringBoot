@@ -12,15 +12,17 @@ public class LendingAcceptController {
     LendingAcceptService lendingAcceptService;
 
     @GetMapping("/prepare")
-    public InquiryResponse AcceptPrepare(){
-        return lendingAcceptService.prepare();
+    public InquiryAcceptResponse acceptPrepare(
+            @RequestParam Long id){
+        return lendingAcceptService.prepare(id);
     }
 
 
     @PostMapping("/execute")
-    public ExecuteResponse AcceptExecute(
-            @RequestBody ExecuteRequest request){
-        return lendingAcceptService.execute(request);
+    public ExecuteLendingAccResponse acceptExecute(
+            @RequestParam Long id,
+            @RequestBody ExecuteLendingAccRequest request){
+        return lendingAcceptService.execute(id, request);
     }
 
 }
