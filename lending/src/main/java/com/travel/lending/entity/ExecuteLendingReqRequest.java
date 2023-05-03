@@ -1,4 +1,4 @@
-package com.travel.lending.enitity;
+package com.travel.lending.entity;
 
 import lombok.Data;
 

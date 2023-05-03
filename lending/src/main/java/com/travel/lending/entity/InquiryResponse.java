@@ -1,6 +1,6 @@
-package com.travel.lending.enitity;
+package com.travel.lending.entity;
 
-import com.travel.lending.enitity.client.user.Account;
+import com.travel.lending.entity.client.user.Account;
 import lombok.Data;
 
 import java.util.List;

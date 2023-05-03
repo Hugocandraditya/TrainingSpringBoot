@@ -1,6 +1,5 @@
-package com.travel.lending.enitity.client.user;
+package com.travel.lending.entity.client.user;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.math.BigDecimal;

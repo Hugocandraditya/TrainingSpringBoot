@@ -1,9 +1,9 @@
 package com.travel.lending.service;
 
-import com.travel.lending.enitity.client.user.Account;
-import com.travel.lending.enitity.client.user.AccountResponse;
-import com.travel.lending.enitity.client.user.UpdateAccount;
-import com.travel.lending.enitity.client.user.User;
+import com.travel.lending.entity.client.user.Account;
+import com.travel.lending.entity.client.user.AccountResponse;
+import com.travel.lending.entity.client.user.UpdateAccount;
+import com.travel.lending.entity.client.user.User;
 import com.travel.lending.repository.UserClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

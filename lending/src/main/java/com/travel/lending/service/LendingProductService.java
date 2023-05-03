@@ -1,6 +1,6 @@
 package com.travel.lending.service;
 
-import com.travel.lending.enitity.client.product.LendingProduct;
+import com.travel.lending.entity.client.product.LendingProduct;
 import com.travel.lending.repository.LendingProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

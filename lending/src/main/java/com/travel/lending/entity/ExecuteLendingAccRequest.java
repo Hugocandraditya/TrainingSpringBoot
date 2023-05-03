@@ -1,8 +1,6 @@
-package com.travel.lending.enitity;
+package com.travel.lending.entity;
 
 import lombok.Data;
-
-import java.math.BigDecimal;
 
 @Data
 public class ExecuteLendingAccRequest {

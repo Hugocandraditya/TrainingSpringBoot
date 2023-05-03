@@ -1,13 +1,16 @@
 package com.travel.useraccount.controller;
 
+import com.travel.useraccount.dto.UserDto;
 import com.travel.useraccount.model.User;
 import com.travel.useraccount.service.UserServiceImpl;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.security.auth.login.LoginException;
 import java.util.List;
-import java.util.Optional;
+
+import static com.travel.useraccount.dto.UserDto.convertToDto;
 
 @RestController
 @RequestMapping("user")
@@ -15,10 +18,19 @@ public class UserController {
     @Autowired
     UserServiceImpl userServiceImpl;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @GetMapping("id")
-    public @ResponseBody Optional<User> getUserById(@RequestParam("id") Long id) {
-        return userServiceImpl.findById(id);
+    public @ResponseBody UserDto getUserById(@RequestParam("id") Long id) {
+        return UserDto.convertToDto(userServiceImpl.findById(id));
     }
+
+//    @GetMapping(value = "/{id}")
+//    @ResponseBody
+//    public PostDto getPost(@PathVariable("id") Long id) {
+//        return convertToDto(postService.getPostById(id));
+//    }
 
     @GetMapping("all")
     public @ResponseBody List<User> getUserByFirstName() {

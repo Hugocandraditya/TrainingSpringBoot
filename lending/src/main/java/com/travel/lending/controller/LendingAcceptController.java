@@ -1,6 +1,6 @@
 package com.travel.lending.controller;
 
-import com.travel.lending.enitity.*;
+import com.travel.lending.entity.*;
 import com.travel.lending.service.LendingAcceptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

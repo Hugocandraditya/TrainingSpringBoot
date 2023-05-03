@@ -13,7 +13,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
-public class SecuirtyConfig {
+public class SecurityConfig {
 
     @Value(value = "${admin.user}")
     private String username;

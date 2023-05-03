@@ -1,9 +1,9 @@
 package com.travel.lending.service;
 
-import com.travel.lending.enitity.*;
-import com.travel.lending.enitity.client.product.LendingProduct;
-import com.travel.lending.enitity.client.user.Account;
-import com.travel.lending.enitity.client.user.User;
+import com.travel.lending.entity.*;
+import com.travel.lending.entity.client.product.LendingProduct;
+import com.travel.lending.entity.client.user.Account;
+import com.travel.lending.entity.client.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

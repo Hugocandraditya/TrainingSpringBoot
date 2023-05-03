@@ -3,7 +3,9 @@ package com.travel.useraccount.controller;
 import com.travel.useraccount.model.Account;
 import com.travel.useraccount.model.AccountList;
 import com.travel.useraccount.service.AccountServiceImpl;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -11,6 +13,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("account")
 public class AccountController {
+
     @Autowired
     AccountServiceImpl accountServiceImpl;
 

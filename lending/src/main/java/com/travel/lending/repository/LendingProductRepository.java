@@ -1,6 +1,6 @@
 package com.travel.lending.repository;
 
-import com.travel.lending.enitity.client.product.LendingProduct;
+import com.travel.lending.entity.client.product.LendingProduct;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,4 +1,4 @@
-package com.travel.lending.enitity.client.product;
+package com.travel.lending.entity;
 
 import lombok.Data;
 
@@ -6,12 +6,9 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
-public class LendingProduct {
-    private Long id;
-    private Long userIdLender;
-    private Long userIdBorrower;
+public class ExecuteLendingAccResponse {
     private String accountLender;
-    private String accountBorrower;
+    private String email;
     private BigDecimal interest;
     private BigDecimal amount;
     private BigDecimal totalReimbursement;

@@ -1,9 +1,9 @@
 package com.travel.lending.repository;
 
-import com.travel.lending.enitity.client.user.Account;
-import com.travel.lending.enitity.client.user.AccountResponse;
-import com.travel.lending.enitity.client.user.UpdateAccount;
-import com.travel.lending.enitity.client.user.User;
+import com.travel.lending.entity.client.user.Account;
+import com.travel.lending.entity.client.user.AccountResponse;
+import com.travel.lending.entity.client.user.UpdateAccount;
+import com.travel.lending.entity.client.user.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
