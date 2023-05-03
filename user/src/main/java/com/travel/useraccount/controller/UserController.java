@@ -10,22 +10,22 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("user")
 public class UserController {
     @Autowired
     UserServiceImpl userServiceImpl;
 
-    @GetMapping("user/id")
+    @GetMapping("id")
     public @ResponseBody Optional<User> getUserById(@RequestParam("id") Long id) {
         return userServiceImpl.findById(id);
     }
 
-    @GetMapping("user/all")
+    @GetMapping("all")
     public @ResponseBody List<User> getUserByFirstName() {
         return userServiceImpl.findAll();
     }
 
-    @PostMapping("account/verify-account")
+    @PostMapping("verify-account")
     public @ResponseBody Boolean verifyPin(@RequestParam("pin") String pin,
                                            @RequestParam("id") Long id) throws Exception {
         Boolean result = userServiceImpl.verifyAccount(pin, id);

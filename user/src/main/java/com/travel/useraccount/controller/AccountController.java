@@ -9,17 +9,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("api")
+@RequestMapping("account")
 public class AccountController {
     @Autowired
     AccountServiceImpl accountServiceImpl;
 
-    @GetMapping("account/id")
+    @GetMapping("id")
     public @ResponseBody Optional<Account> getAccountById(@RequestParam("id") Long id) {
         return accountServiceImpl.findById(id);
     }
 
-    @GetMapping("account/user_id")
+    @GetMapping("user_id")
     public @ResponseBody AccountList getAccountByUserId(@RequestParam("user_id") Long userId) {
         return accountServiceImpl.findByUserId(userId);
     }
