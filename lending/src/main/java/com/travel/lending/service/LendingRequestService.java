@@ -81,7 +81,7 @@ public class LendingRequestService {
         lendingProductService.createLendingProduct(lendingProduct);
     }
     private BigDecimal countTotalReimburse(BigDecimal amount, BigDecimal interest){
-        return amount.multiply(interest);
+        return amount.add(amount.multiply(interest).divide(new BigDecimal(100)));
     }
 
 }
