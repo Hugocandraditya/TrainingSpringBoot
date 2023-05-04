@@ -13,4 +13,10 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
 
     Optional<Account> findById(Long id);
 
+    @Override
+    void deleteById(Long aLong);
+
+    @Override
+    <S extends Account> S save(S entity);
+
 }

@@ -16,6 +16,9 @@ public class User {
     @Column(name = "pin")
     private String pin;
 
+    @Column(name = "role")
+    private String role;
+
     public Long getId() {
         return id;
     }
@@ -46,5 +49,13 @@ public class User {
 
     public void setPin(String pin) {
         this.pin = pin;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

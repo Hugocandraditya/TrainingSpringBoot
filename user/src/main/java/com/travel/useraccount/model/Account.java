@@ -17,6 +17,10 @@ public class Account {
     private String acc_type;
     @Column(name = "acc_name")
     private String acc_name;
+    @Column(name = "balance")
+    private Long balance;
+    public Account() {
+    }
 
     public Long getId() {
         return id;
@@ -57,4 +61,24 @@ public class Account {
     public void setAcc_name(String acc_name) {
         this.acc_name = acc_name;
     }
+
+    public Long getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Long balance) {
+        this.balance = balance;
+    }
+
+    public Account(Long id, Long userId, String acc_number, String acc_type, String acc_name, Long balance) {
+        this.id = id;
+        this.userId = userId;
+        this.acc_number = acc_number;
+        this.acc_type = acc_type;
+        this.acc_name = acc_name;
+        this.balance = balance;
+    }
+
+
+
 }

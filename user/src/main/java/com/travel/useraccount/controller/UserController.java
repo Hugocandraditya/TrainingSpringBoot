@@ -5,12 +5,12 @@ import com.travel.useraccount.model.User;
 import com.travel.useraccount.service.UserServiceImpl;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.security.auth.login.LoginException;
 import java.util.List;
-
-import static com.travel.useraccount.dto.UserDto.convertToDto;
 
 @RestController
 @RequestMapping("user")
@@ -25,12 +25,6 @@ public class UserController {
     public @ResponseBody UserDto getUserById(@RequestParam("id") Long id) {
         return UserDto.convertToDto(userServiceImpl.findById(id));
     }
-
-//    @GetMapping(value = "/{id}")
-//    @ResponseBody
-//    public PostDto getPost(@PathVariable("id") Long id) {
-//        return convertToDto(postService.getPostById(id));
-//    }
 
     @GetMapping("all")
     public @ResponseBody List<User> getUserByFirstName() {
@@ -48,4 +42,14 @@ public class UserController {
         }
 
     }
+
+//    @DeleteMapping("delete")
+//    public ResponseEntity<HttpStatus> deleteAccount(@RequestParam("id") Long id) {
+//        try {
+//            userServiceImpl.deleteById(id);
+//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 }
