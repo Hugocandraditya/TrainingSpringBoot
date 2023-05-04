@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class LendingAcceptService {
@@ -22,6 +24,9 @@ public class LendingAcceptService {
         verifiedUser(userId);
         List<Account> accountList = userService.getAccountListByUserId(userId);
         List<LendingProduct> lendingProductList = lendingProductService.getLendingProductList();
+        lendingProductList = lendingProductList.stream()
+                .filter(lendingProduct -> LendingHelper.REQ_STATUS.equals(lendingProduct.getStatus()) && !Objects.equals(userId, lendingProduct.getUserIdBorrower()))
+                .collect(Collectors.toList());
         return mappingPrepareResponse(accountList, lendingProductList);
     }
 

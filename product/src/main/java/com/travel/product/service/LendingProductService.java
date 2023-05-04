@@ -18,10 +18,7 @@ public class LendingProductService {
     public List<LendingProduct> inquiryAllLendingProduct(){
         List<LendingProductModel> lendingProductModelList = lendingProductRepository.findAll();
         return lendingProductModelList.stream()
-                .filter(lendingProductModel -> !"PAIDOFF".equals(lendingProductModel.getStatus()))
                 .map(LendingProductHelper::mapLendingProduct).toList();
-
-
     }
 
     public List<LendingProduct> inquiryLendingProductByLenderId(Long lenderId){
