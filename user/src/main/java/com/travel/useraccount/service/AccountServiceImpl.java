@@ -58,7 +58,7 @@ public class AccountServiceImpl implements AccountService {
                 .findFirst().get();
 
         accountBorrower.setBalance(accountBorrower.getBalance().add(updateAccount.getAmount()));
-        accountLender.setBalance(accountLender.getBalance().add(updateAccount.getAmount()));
+        accountLender.setBalance(accountLender.getBalance().subtract(updateAccount.getAmount()));
 
         accountRepository.save(accountBorrower);
         accountRepository.save(accountLender);
