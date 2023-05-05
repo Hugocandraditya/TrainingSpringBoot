@@ -2,6 +2,7 @@ package com.travel.useraccount.controller;
 
 import com.travel.useraccount.model.Account;
 import com.travel.useraccount.model.AccountList;
+import com.travel.useraccount.model.UpdateAccount;
 import com.travel.useraccount.repository.AccountRepository;
 import com.travel.useraccount.service.AccountServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 @RestController
@@ -35,7 +37,7 @@ public class AccountController {
             @RequestParam("accNumber") String accNumber,
             @RequestParam("accType") String accType,
             @RequestParam("accName") String accName,
-            @RequestParam("balance") Long balance
+            @RequestParam("balance") BigDecimal balance
     ) {
         return accountServiceImpl.save(new Account(
                 id,
@@ -59,11 +61,9 @@ public class AccountController {
 
     @PostMapping("update-balance")
     public void updateBalanceAccount(
-            @RequestParam("amount") Long amount,
-            @RequestParam("borrowerId") Long borrowerId,
-            @RequestParam("lenderId") Long lenderId) {
+            @RequestBody UpdateAccount updateAccount) {
         try {
-            accountServiceImpl.updateBalance(amount, getAccountById(borrowerId), getAccountById(lenderId));
+            accountServiceImpl.updateBalance(updateAccount);
         }
         catch (Exception e){
             throw new RuntimeException();

@@ -37,7 +37,7 @@ public class LendingProductService {
 
     public LendingProduct updateLendingProduct(LendingProduct lendingProduct) {
         try {
-            return lendingProductRepository.updateProduct(new URI(createProductLendingUrl),lendingProduct);
+            return lendingProductRepository.updateProduct(new URI(updateProductLendingUrl),lendingProduct);
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }

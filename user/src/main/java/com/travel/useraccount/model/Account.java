@@ -2,6 +2,8 @@ package com.travel.useraccount.model;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "account")
 public class Account {
@@ -18,7 +20,7 @@ public class Account {
     @Column(name = "acc_name")
     private String acc_name;
     @Column(name = "balance")
-    private Long balance;
+    private BigDecimal balance;
     public Account() {
     }
 
@@ -62,15 +64,15 @@ public class Account {
         this.acc_name = acc_name;
     }
 
-    public Long getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    public void setBalance(Long balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 
-    public Account(Long id, Long userId, String acc_number, String acc_type, String acc_name, Long balance) {
+    public Account(Long id, Long userId, String acc_number, String acc_type, String acc_name, BigDecimal balance) {
         this.id = id;
         this.userId = userId;
         this.acc_number = acc_number;

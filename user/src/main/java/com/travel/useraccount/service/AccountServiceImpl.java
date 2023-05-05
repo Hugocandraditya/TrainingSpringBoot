@@ -2,7 +2,9 @@ package com.travel.useraccount.service;
 
 import com.travel.useraccount.model.Account;
 import com.travel.useraccount.model.AccountList;
+import com.travel.useraccount.model.UpdateAccount;
 import com.travel.useraccount.repository.AccountRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,15 +46,21 @@ public class AccountServiceImpl implements AccountService {
         return accountRepository.save(account);
     }
 
-    public void updateBalance(Long amount, Optional<Account> borrowerAccount, Optional<Account> lenderAccount) {
-        borrowerAccount = Optional.of(accountRepository.findById(borrowerAccount.get().getId()).get());
-        lenderAccount = Optional.of(accountRepository.findById(lenderAccount.get().getId()).get());
-        Long borrowerNewBalance = borrowerAccount.get().getBalance() + amount;
-        Long lenderNewBalance = lenderAccount.get().getBalance() - amount;
-        borrowerAccount.get().setBalance(borrowerNewBalance);
-        lenderAccount.get().setBalance(lenderNewBalance);
-        System.out.println(borrowerNewBalance);
-        System.out.println(lenderNewBalance);
-    }
+    @Transactional
+    public void updateBalance(UpdateAccount updateAccount) {
+        List<Account> accountListBorrower = accountRepository.findByUserId(updateAccount.getUserIdBorrower());
+        List<Account> accountListLender = accountRepository.findByUserId(updateAccount.getUserIdLender());
 
+        Account accountBorrower = accountListBorrower.stream().filter(account -> updateAccount.getAccountBorrower().equals(account.getAcc_number()))
+                .findFirst().get();
+
+        Account accountLender = accountListLender.stream().filter(account -> updateAccount.getAccountLender().equals(account.getAcc_number()))
+                .findFirst().get();
+
+        accountBorrower.setBalance(accountBorrower.getBalance().add(updateAccount.getAmount()));
+        accountLender.setBalance(accountLender.getBalance().add(updateAccount.getAmount()));
+
+        accountRepository.save(accountBorrower);
+        accountRepository.save(accountLender);
+    }
 }
