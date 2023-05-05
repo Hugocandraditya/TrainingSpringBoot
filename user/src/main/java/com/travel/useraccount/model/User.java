@@ -19,6 +19,9 @@ public class User {
     @Column(name = "role")
     private String role;
 
+    public User(Long id, Long name, String email, String pin, String role) {
+    }
+
     public Long getId() {
         return id;
     }

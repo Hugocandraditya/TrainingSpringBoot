@@ -1,6 +1,7 @@
 package com.travel.useraccount.controller;
 
 import com.travel.useraccount.dto.UserDto;
+import com.travel.useraccount.model.Account;
 import com.travel.useraccount.model.User;
 import com.travel.useraccount.service.UserServiceImpl;
 import org.modelmapper.ModelMapper;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.security.auth.login.LoginException;
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -43,13 +45,30 @@ public class UserController {
 
     }
 
-//    @DeleteMapping("delete")
-//    public ResponseEntity<HttpStatus> deleteAccount(@RequestParam("id") Long id) {
-//        try {
-//            userServiceImpl.deleteById(id);
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
+    @PostMapping("/create")
+    public User createAccount(
+            @RequestParam("id") Long id,
+            @RequestParam("name") Long name,
+            @RequestParam("email") String email,
+            @RequestParam("pin") String pin,
+            @RequestParam("role") String role
+    ) {
+        return userServiceImpl.save(new User(
+                id,
+                name,
+                email,
+                pin,
+                role
+        ));
+    }
+
+    @DeleteMapping("delete")
+    public ResponseEntity<HttpStatus> deleteAccount(@RequestParam("id") Long id) {
+        try {
+            userServiceImpl.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
