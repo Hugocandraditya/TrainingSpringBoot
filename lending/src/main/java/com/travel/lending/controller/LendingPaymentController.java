@@ -18,8 +18,9 @@ public class LendingPaymentController {
     }
 
     @PostMapping("/execute")
-    public ExecuteLendingReqResponse paymentExecute(
-            @RequestBody ExecuteLendingReqRequest request){
-        return lendingProductService.execute(request);
+    public ExecuteLendingAccResponse paymentExecute(
+            @RequestParam Long id,
+            @RequestBody ExecuteLendingAccRequest request){
+        return lendingProductService.execute(id, request);
     }
 }
