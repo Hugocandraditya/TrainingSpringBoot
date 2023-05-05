@@ -48,7 +48,7 @@ public class UserController {
     @PostMapping("/create")
     public User createAccount(
             @RequestParam("id") Long id,
-            @RequestParam("name") Long name,
+            @RequestParam("name") String name,
             @RequestParam("email") String email,
             @RequestParam("pin") String pin,
             @RequestParam("role") String role
