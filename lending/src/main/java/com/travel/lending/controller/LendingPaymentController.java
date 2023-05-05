@@ -12,7 +12,7 @@ public class LendingPaymentController {
     LendingPaymentService lendingProductService;
 
     @GetMapping("/prepare")
-    public InquiryResponse paymentPrepare(
+    public InquiryAcceptResponse paymentPrepare(
             @RequestParam Long id){
         return lendingProductService.prepare(id);
     }

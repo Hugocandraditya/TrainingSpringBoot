@@ -4,12 +4,9 @@ import com.travel.lending.entity.*;
 import com.travel.lending.entity.client.product.LendingProduct;
 import com.travel.lending.entity.client.user.Account;
 import com.travel.lending.entity.client.user.User;
-import com.travel.lending.repository.LendingProductRepository;
-import com.travel.lending.repository.UserClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -28,7 +25,7 @@ public class LendingPaymentService {
         List<Account> accountList = userService.getAccountListByUserId(userId);
         List<LendingProduct> lendingProductList = lendingProductService.getLendingProductList();
         lendingProductList = lendingProductList.stream()
-                .filter(lendingProduct -> LendingHelper.REQ_STATUS.equals(lendingProduct.getStatus()) && !Objects.equals(userId, lendingProduct.getUserIdBorrower()))
+                .filter(lendingProduct -> LendingHelper.ACC_STATUS.equals(lendingProduct.getStatus()) && Objects.equals(userId, lendingProduct.getUserIdBorrower()))
                 .collect(Collectors.toList());
         return mappingPrepareResponse(accountList, lendingProductList);
     }
@@ -43,15 +40,15 @@ public class LendingPaymentService {
         LendingProduct lendingProduct = lendingProductService.getLendingProductById(request.getProductId());
 
         userService.updateAccountBalance(
-                lendingProduct.getUserIdBorrower(),
+                lendingProduct.getUserIdLender(),
                 userId,
-                lendingProduct.getAccountBorrower(),
+                lendingProduct.getAccountLender(),
                 account.getAccNumber(),
                 lendingProduct.getAmount()
         );
 
-        ExecuteLendingAccResponse executeLendingAccResponse = mappingExecuteResponse(lendingProduct, user, account);
-        saveLendingProduct(lendingProduct, executeLendingAccResponse, user);
+        ExecuteLendingAccResponse executeLendingAccResponse = mappingExecuteResponse(lendingProduct, user);
+        saveLendingProduct(lendingProduct, executeLendingAccResponse);
 
         return executeLendingAccResponse;
     }
@@ -74,23 +71,20 @@ public class LendingPaymentService {
             throw new RuntimeException("Verification Failed");
     }
 
-    private ExecuteLendingAccResponse mappingExecuteResponse(LendingProduct lendingProduct, User user, Account account) {
+    private ExecuteLendingAccResponse mappingExecuteResponse(LendingProduct lendingProduct, User user) {
         ExecuteLendingAccResponse response = new ExecuteLendingAccResponse();
-        response.setAccountLender(account.getAccNumber());
+        response.setAccountLender(lendingProduct.getAccountLender());
         response.setEmail(user.getEmail());
         response.setInterest(lendingProduct.getInterest());
         response.setAmount(lendingProduct.getAmount());
         response.setTotalReimbursement(lendingProduct.getTotalReimbursement());
         response.setReference(lendingProduct.getReference());
-        response.setStatus(LendingHelper.ACC_STATUS);
+        response.setStatus(LendingHelper.PAID_STATUS);
 
         return response;
     }
 
-    private void saveLendingProduct(LendingProduct lendingProduct, ExecuteLendingAccResponse response, User user) {
-        lendingProduct.setUserIdLender(user.getId());
-        lendingProduct.setAccountLender(response.getAccountLender());
-        lendingProduct.setDueTime(LocalDateTime.now().plusMonths(1));
+    private void saveLendingProduct(LendingProduct lendingProduct, ExecuteLendingAccResponse response) {
         lendingProduct.setStatus(response.getStatus());
 
         lendingProductService.updateLendingProduct(lendingProduct);

@@ -67,12 +67,12 @@ public class UserService {
         }
     }
 
-    public void updateAccountBalance(Long userIdBorrower, Long userIdLender, String accountBorrower, String accountLender, BigDecimal amount){
+    public void updateAccountBalance(Long userIdPlus, Long userIdMinus, String accountPlus, String accountMinus, BigDecimal amount){
         UpdateAccount updateAccount = new UpdateAccount();
-        updateAccount.setUserIdBorrower(userIdBorrower);
-        updateAccount.setUserIdLender(userIdLender);
-        updateAccount.setAccountBorrower(accountBorrower);
-        updateAccount.setAccountLender(accountLender);
+        updateAccount.setUserIdBorrower(userIdPlus);
+        updateAccount.setUserIdLender(userIdMinus);
+        updateAccount.setAccountBorrower(accountPlus);
+        updateAccount.setAccountLender(accountMinus);
         updateAccount.setAmount(amount);
         try {
             userClientRepository.updateAccountBalance(new URI(updateAccountBalance),updateAccount);
