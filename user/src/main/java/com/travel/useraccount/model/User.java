@@ -22,7 +22,4 @@ public class User {
     @Column(name = "pin")
     private String pin;
 
-    @Column(name = "role")
-    private String role;
-
 }

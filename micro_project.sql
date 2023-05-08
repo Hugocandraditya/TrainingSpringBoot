@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2023 at 04:57 PM
+-- Generation Time: May 08, 2023 at 03:48 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -33,7 +33,7 @@ CREATE TABLE `account` (
   `acc_number` varchar(20) NOT NULL,
   `acc_type` varchar(20) NOT NULL,
   `acc_name` varchar(40) NOT NULL,
-  `balance` int(11) NOT NULL
+  `balance` bigint(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -41,7 +41,11 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`id`, `user_id`, `acc_number`, `acc_type`, `acc_name`, `balance`) VALUES
-(1, 1, '123123123', 'Kredit', 'Hugo ', 0);
+(1, 1, '1234512345', 'Kredit', 'Visa', NULL),
+(2, 1, '123123123', 'Debit', 'BCA Xpresi', NULL),
+(3, 1, '1212121212', 'VA', 'Lending', 1005000),
+(4, 2, '1234567890', 'Kredit', 'MasterCard', NULL),
+(5, 2, '11112222333', 'VA', 'Lending', 25000);
 
 -- --------------------------------------------------------
 
@@ -68,9 +72,8 @@ CREATE TABLE `lending_product` (
 --
 
 INSERT INTO `lending_product` (`id`, `user_id_lender`, `user_id_borrower`, `account_lender`, `account_borrower`, `interest`, `amount`, `total_reimbursement`, `due_time`, `reference`, `status`) VALUES
-(1, 1, 1, '123123', '12345', 10, 1000000, 1100000, '2023-04-25', 'A123BC', 'PAIDOFF'),
-(2, NULL, 1, NULL, '123123123', 10, 1000000, 10000000, NULL, 'e736db01-7341-475b-b60c-799497b21172', 'REQUESTED'),
-(3, NULL, 1, NULL, '123123123', 10, 1000000, 1100000, NULL, '3b6135d6-eaba-455f-acd0-0c416960d972', 'REQUESTED');
+(7, 1, 2, '1212121212', '11112222333', 10, 50000, 55000, '2023-06-08', '381300b3-ec57-4819-b548-e528a2381d31', 'PAIDOFF'),
+(8, 1, 2, '1212121212', '11112222333', 10, 50000, 55000, '2023-06-08', '598df619-123a-4483-8ab1-6ca09d3ec6e1', 'PAIDOFF');
 
 -- --------------------------------------------------------
 
@@ -95,7 +98,8 @@ CREATE TABLE `travel_history` (
 
 INSERT INTO `travel_history` (`id`, `name`, `email`, `account_number`, `package_name`, `count`, `total`, `status`) VALUES
 (1, 'Hugo', 'hugo@test.com', '123123123', 'Jalan jalan jogja', 2, 600000, 'SUCCESS'),
-(2, 'Hugo', 'hugo@test.com', '123123123', 'Jalan jalan jogja', 2, 600000, 'SUCCESS');
+(2, 'Hugo', 'hugo@test.com', '123123123', 'Jalan jalan jogja', 2, 600000, 'SUCCESS'),
+(3, 'Hugo', 'hugo@test.com', '123123123', 'Jalan jalan jogja', 1, 300000, 'SUCCESS');
 
 -- --------------------------------------------------------
 
@@ -127,16 +131,16 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `name` varchar(40) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `pin` varchar(10) NOT NULL,
-  `role` varchar(50) NOT NULL
+  `pin` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `name`, `email`, `pin`, `role`) VALUES
-(1, 'Hugo', 'hugo@test.com', '123456', '');
+INSERT INTO `user` (`id`, `name`, `email`, `pin`) VALUES
+(1, 'Hugo', 'hugo@test.com', '123456'),
+(2, 'candra', 'candra@sad.com', '123456');
 
 --
 -- Indexes for dumped tables
@@ -180,19 +184,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `lending_product`
 --
 ALTER TABLE `lending_product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `travel_history`
 --
 ALTER TABLE `travel_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `travel_package`
@@ -204,7 +208,7 @@ ALTER TABLE `travel_package`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

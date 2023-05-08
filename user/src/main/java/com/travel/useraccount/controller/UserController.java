@@ -50,15 +50,13 @@ public class UserController {
             @RequestParam("id") Long id,
             @RequestParam("name") String name,
             @RequestParam("email") String email,
-            @RequestParam("pin") String pin,
-            @RequestParam("role") String role
+            @RequestParam("pin") String pin
     ) {
         return userServiceImpl.save(new User(
                 id,
                 name,
                 email,
-                pin,
-                role
+                pin
         ));
     }
 

@@ -80,6 +80,7 @@ public class LendingAcceptService {
         response.setEmail(user.getEmail());
         response.setInterest(lendingProduct.getInterest());
         response.setAmount(lendingProduct.getAmount());
+        response.setDueTime(LocalDateTime.now().plusMonths(1));
         response.setTotalReimbursement(lendingProduct.getTotalReimbursement());
         response.setReference(lendingProduct.getReference());
         response.setStatus(LendingHelper.ACC_STATUS);
@@ -90,7 +91,7 @@ public class LendingAcceptService {
     private void saveLendingProduct(LendingProduct lendingProduct, ExecuteLendingAccResponse response, User user) {
         lendingProduct.setUserIdLender(user.getId());
         lendingProduct.setAccountLender(response.getAccountLender());
-        lendingProduct.setDueTime(LocalDateTime.now().plusMonths(1));
+        lendingProduct.setDueTime(response.getDueTime());
         lendingProduct.setStatus(response.getStatus());
 
         lendingProductService.updateLendingProduct(lendingProduct);

@@ -44,7 +44,7 @@ public class LendingPaymentService {
                 userId,
                 lendingProduct.getAccountLender(),
                 account.getAccNumber(),
-                lendingProduct.getAmount()
+                lendingProduct.getTotalReimbursement()
         );
 
         ExecuteLendingAccResponse executeLendingAccResponse = mappingExecuteResponse(lendingProduct, user);
