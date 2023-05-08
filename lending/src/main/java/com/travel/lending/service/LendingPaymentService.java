@@ -55,6 +55,9 @@ public class LendingPaymentService {
 
     private InquiryAcceptResponse mappingPrepareResponse(List<Account> accountList, List<LendingProduct> lendingProductList) {
         InquiryAcceptResponse inquiryAcceptResponse = new InquiryAcceptResponse();
+        accountList = accountList.stream()
+                .filter(account -> LendingHelper.VA_TYPE.equals(account.getAccType()))
+                .collect(Collectors.toList());
         inquiryAcceptResponse.setAccountList(accountList);
         inquiryAcceptResponse.setLendingProductList(lendingProductList);
         return inquiryAcceptResponse;

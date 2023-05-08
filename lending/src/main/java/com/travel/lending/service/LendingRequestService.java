@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class LendingRequestService {
@@ -50,6 +51,10 @@ public class LendingRequestService {
 
     private InquiryRequestResponse mappingPrepareResponse(List<Account> accountList) {
         InquiryRequestResponse response = new InquiryRequestResponse();
+        accountList = accountList.stream()
+                .filter(account -> LendingHelper.VA_TYPE.equals(account.getAccType()))
+                .collect(Collectors.toList());
+
         response.setAccountList(accountList);
 
         return response;
