@@ -27,12 +27,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserRepository deleteById(Long id) {
+        userRepository.deleteById(id);
         return null;
     }
 
     @Override
     public User save(User user) {
-        return null;
+        userRepository.save(user);
+        return user;
     }
 
     public List<User> findAll() {
